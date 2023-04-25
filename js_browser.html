@@ -28,6 +28,15 @@
 
 
 	   console.log('cookie'+document.cookie);
+
+
+	   function doSubmitForm(){
+		//var form = document.getElementById('test-form');
+        // 可以在此修改form的input...
+        // 提交form:
+        //form.submit();
+		console.log("doSubmitForm");
+	   }
 	   
 	</script>
 </head>
@@ -133,6 +142,26 @@
 	parent.removeChild(self);
 
 </script>
+
+
+<input type="text" id="email">
+<script>
+	var email=document.getElementById('email');
+	email.value='123@mail.com';
+</script>
+
+<input type="date">
+
+<input type="datetime-local">
+
+<input type="color">
+
+
+
+<form id="test-form">
+    <input type="text" name="test">
+    <button type="button" onclick="doSubmitForm()">Submit</button>
+</form>
 
 <body>
 
