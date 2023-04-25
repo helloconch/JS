@@ -1,0 +1,140 @@
+<html>
+<head>
+	<title>js_browser</title>
+	<script type="text/javascript">
+		//获取浏览器窗口的内部宽度和高度。内部宽高是指除去菜单栏、工具栏、边框等占位元素后，用于显示网页的净宽高。
+       console.log(`window inner w:${window.innerWidth}  h:${window.innerHeight}`);
+	   //获取浏览器窗口的整个宽高。
+	   console.log(`window outer w:${window.outerWidth}  h:${window.outerHeight}`);
+
+
+	   console.log('appName = ' + navigator.appName);
+	   console.log('appVersion = ' + navigator.appVersion);
+	   console.log('language = ' + navigator.language);
+	   console.log('platform = ' + navigator.platform);
+	   console.log('userAgent = ' + navigator.userAgent);
+
+	   console.log(`screen w:${screen.width}  h:${screen.height}`);
+
+	   console.log('location:'+location)
+	   console.log('location href:'+location.href)
+	   console.log('location protocol:'+location.protocol)
+	   console.log('location host:'+location.host)
+	   console.log('location hostname:'+location.hostname)
+
+	   console.log(`title:${document.title}`);
+
+	   document.title="Study JS ";
+
+
+	   console.log('cookie'+document.cookie);
+	   
+	</script>
+</head>
+
+<dl id="drink-menu" style="border:solid 1px #ccc;padding:6px;">
+    <dt>摩卡</dt>
+    <dd>热摩卡咖啡</dd>
+    <dt>酸奶</dt>
+    <dd>北京老酸奶</dd>
+    <dt>果汁</dt>
+    <dd>鲜榨苹果汁</dd>
+</dl>
+
+<script>
+	var drinks=document.getElementsByTagName('dt');
+	var s='饮料有:'
+	for(var item of drinks){
+		s = s+ item.innerHTML+ ',';
+	}
+	console.log(s);
+</script>
+
+
+<div id="test-div">
+	<div class="c-red">
+		<p id="test-p">JavaScript</p>
+		<p>Java</p>
+	  </div>
+	  <div class="c-red c-green">
+		<p>Python</p>
+		<p>Ruby</p>
+		<p>Swift</p>
+	  </div>
+	  <div class="c-green">
+		<p>Scheme</p>
+		<p>Haskell</p>
+	  </div>
+</div>
+
+<script>
+	var a1=document.getElementById('test-p');
+	console.log('a1:'+a1.innerText);
+
+	var a2=document.getElementsByClassName('c-red')[1].getElementsByTagName('p');
+	console.log(Array.from(a2).map(x=>x.innerText));
+
+	var a3=document.getElementsByClassName('c-green')[1].lastElementChild;
+	console.log('a3:'+a3.innerText);
+</script>
+
+
+<p id="p-id">...</p>
+
+<script>
+	function findElement(id){
+		return document.getElementById(id);
+	}
+	var p=findElement('p-id');
+	p.innerHTML='<span>change</span>';
+
+	console.log(p.innerText);
+	console.log(p.textContent);
+
+	p.style.color='#f00';
+	p.style.fontSize=20;
+
+</script>
+
+
+<p id="js">JavaScript</p>
+<div id="list">
+    <p id="java">Java</p>
+    <p id="python">Python</p>
+    <p id="scheme">Scheme</p>
+</div>
+
+
+<script>
+	var p=document.getElementById('js');
+	var list=document.getElementById('list');
+	list.appendChild(p);
+
+	var haskell =document.createElement('p');
+	haskell.innerText='haskell ';
+	list.appendChild(haskell);
+
+
+	var d = document.createElement('style');
+	d.setAttribute('type', 'text/css');
+	d.innerHTML = 'p { color: red }';
+	document.getElementsByTagName('head')[0].appendChild(d);
+
+
+	var haskell1 =document.createElement('p');
+	haskell1.innerText='haskell1';
+
+	var python=document.getElementById('python');
+	list.insertBefore(haskell1,python);
+
+
+	var self=document.getElementById('scheme');
+	var parent=self.parentElement;
+	parent.removeChild(self);
+
+</script>
+
+<body>
+
+</body>
+</html>

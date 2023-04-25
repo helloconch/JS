@@ -1,0 +1,318 @@
+<html>
+<head>
+		<script type="text/javascript">
+			var zhang={
+				name:'张',
+				age:18,
+				address:'bj'
+			}
+			console.log(`zhang 自身是否含有name属性:${zhang.hasOwnProperty('name')}`);
+			console.log(`zhang 自身是否含有toString属性:${zhang.hasOwnProperty('toString')}`);
+			//对象最终都会在原型链上指向object，所以zhang也拥有toString属性
+			console.log(`zhang ${'toString' in zhang}`)
+			var address='beijing'
+			if(address.length){
+				console.log(`address len:${address.length}`);
+			}
+
+			for(var key in zhang){
+                console.log(`zhang的属性key:${key}`);
+			}
+
+			var m = new Map();
+			m.set('a',10);
+			m.set('b',20);
+			console.log(`m是否含有key a:${m.has('a')}`);
+			console.log(`m中key a value:${m.get('a')}`);
+			m.delete('b');
+			console.log(`m中key b value:${m.get('b')}`)
+			var s= new Set();
+			s.add(1);
+			s.add(1);
+			s.add(2);
+			console.log(s);
+
+			var a=['a','b','c']
+
+			for(var item of a){
+				console.log("a item::"+item);
+			}
+			for(var item of m){
+				console.log("m item::"+item);
+			}
+
+			for(var item of s){
+				console.log("s item::"+item);
+			}
+
+			a.forEach(function(value,index,arr){
+				console.log(`index:${index} value:${value}`);
+			});
+
+			m.forEach(function(value,key,map){
+				console.log(`key:${key} value:${value}`);
+			});
+
+			s.forEach(function(value,value2,set){
+				console.log(`value:${value} value2:${value2}`);
+			});
+
+
+			function abs(x){
+
+				for(var i=0;i<arguments.length;i++){
+					console.log(`arguments:${arguments[i]}`);
+				}
+
+				if(typeof x === 'undefined'){
+                   return -100;
+				}
+				if(typeof x !=='number'){
+					return 'not a number';
+				}
+				if(x>0){
+					return x;
+				}else{
+					return -x;
+				}
+			}
+			console.log(abs());
+			console.log(abs('a'));
+			console.log(abs(123));
+
+
+			// var oldAlert=window.alert;
+			// window.alert=function(){
+
+			// }
+			// alert("AA");
+			// oldAlert("BB")
+			// window.alert=oldAlert;
+			// alert("CC");
+
+
+			let [, , z] = ['hello', 'JavaScript', 'ES6'];
+			console.log(`z:${z}`);
+
+
+			function add(x,y,f){
+				return f(x)+f(y);
+			}
+
+			console.log(`add:${add(-5,6,Math.abs)}`);
+
+			
+			var a1=[1,2,3,4];
+			function pow(x){
+				return x*x;
+			}
+			console.log(a1.map(pow));
+
+			a1.map(function(v,index,arr){
+				console.log(`index:${index}-value:${v}`);
+			});
+
+			function string2int(s) {
+				var arr=Array.from(s);
+				console.log(arr);
+				arr=arr.map(x=>x*1);
+				console.log(arr);
+				var num=arr.reduce(function(x,y){
+					return x*10+y;
+				});
+				return num;
+			}
+
+			console.log(string2int('12345'));
+
+			function get_primes(arr) {
+				return arr.filter(function(x){
+					if(x==1){
+						return false;
+					}
+					for(var i=2;i<=Math.sqrt(x);i++){
+						if(x%i==0){
+							return false;
+						}
+					}
+					return true;
+				});
+			}
+
+			function sum(arr){
+				var sum= arr.reduce(function(x,y){
+					return x+y;
+				});
+				return sum;
+			}
+			console.log(`lazysum:${sum([1,2,3,4,5,6])}`);
+			
+			function lazySum(arr){
+				var sum=function(){
+					return arr.reduce(function(x,y){
+					return x+y;
+				});
+				}
+				return sum;
+			}
+
+			var lazySumFunction=lazySum([1,2,3,4,5,6]);
+			console.log(`lazysum:${lazySumFunction()}`);
+
+
+		function create_counter(initial){
+			var x= initial || 0;
+			return{
+				inc:function(){
+					x=x+1;
+					return x;
+				}
+			}
+		}
+
+		var ccc=create_counter(10);
+		console.log(ccc.inc());
+		console.log(ccc.inc());
+
+
+		function create_counter2(initial){
+			var x= initial || 0;
+			return function(){
+				x=x+1;
+				return x;
+			}
+		}
+
+		console.log("----------------------------");
+		var ccc2=create_counter2(10);
+		console.log(ccc2());
+		console.log(ccc2());
+
+		console.log("----------------------------");
+
+		function makePow(n){
+			return function(x){
+				return  Math.pow(x,n);
+			}
+		}
+
+		var pow2=makePow(2);
+		var pow3=makePow(3);
+
+		console.log(pow2(5));
+		console.log(pow3(5));
+
+
+		console.log(123..toString());
+		console.log((123).toString())
+
+		var date=new Date(1682331125596);
+		console.log(date.toLocaleString());
+		console.log(date.toUTCString());
+
+		var xiaoming = {
+   			 name: '小明',
+			 age: 14,
+			 gender: true,
+			 height: 1.65,
+			 grade: null,
+			 'middle-school': '\"W3C\" Middle School',
+			 skills: ['JavaScript', 'Java', 'Python', 'Lisp']
+			};
+		console.log(JSON.stringify(xiaoming));
+		console.log(JSON.stringify(xiaoming,null,' '));
+
+
+		var url = 'https://api.openweathermap.org/data/2.5/forecast?q=Beijing,cn&appid=800f49846586c3ba6e7052cfc89af16c';
+		// $.getJSON(url,function(data){
+
+		// 	var result={
+		// 		city:data.city.name,
+		// 		weather: data.list[0].weather[0].main,
+		// 		time: data.list[0].dt_txt
+		// 	}
+		// 	console.log(JSON.stringify(result,null,' '));
+		// });
+
+        //普通方式定义对象
+		var student={
+			name:'Robot',
+			age:11,
+			run:function(){
+				console.log(this.name+" running...");
+			}
+		}
+
+		var Xi={
+			name:'小明'
+		}
+
+		Xi.__proto__=student;
+		Xi.run();
+
+
+		function createStu(name){
+			var stu=Object.create(student);
+			stu.name=name;
+			return stu;
+		}
+
+		var Li=createStu('小李');
+		Li.run();
+		console.log(Li.__proto__==student);
+
+
+		//使用函数被定义为用于创建对象的构造函数
+
+		function Animal(props){
+			this.name=props.name || 'Default';
+			this.age=props.age || -1;
+		}
+
+		//创建的对象共享一个hello函数
+
+		Animal.prototype.hello=function(){
+			console.log(this.name+" age:"+this.age);
+		}
+
+		function createAnim(props){
+			return  new Animal(props||{});
+		}
+
+		var cat=createAnim({
+			name:'Cat',
+			age:10
+		});
+
+		cat.hello();
+
+
+		class Fruit{
+			constructor(name){
+				this.name=name;
+			}
+			hello(){
+				console.log(this.name+" hello>>>");
+			}
+		}
+
+		var Apple=new Fruit("Apple");
+		Apple.hello();
+
+		class PrivateFruit extends Fruit{
+			constructor(name,color){
+				super(name);
+				this.color=color;
+			}
+
+			test(){
+				console.log(this.name+" color:"+this.color);
+			}
+		}
+
+		var bann=new PrivateFruit('香蕉',"黄色");
+		bann.test();
+
+	</script>
+</head>
+</html>
