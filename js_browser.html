@@ -163,6 +163,159 @@
     <button type="button" onclick="doSubmitForm()">Submit</button>
 </form>
 
+
+<form id="test_form1" onsubmit="return onSubmit()">
+	<input type="text" name="test">
+	<button type="submit">submit</button>
+</form>
+
+<script>
+	function onSubmit(){
+		console.log("onSubmit>>>>>>>");
+		//var form = document.getElementById('test_form1');
+    	// 可以在此修改form的input...
+		// 继续下一步:
+		//console.log("onSubmit>>>>>>>");
+		//return true;
+		//return true来告诉浏览器继续提交，如果return false，浏览器将不会继续提交form，这种情况通常对应用户输入有误，提示用户错误信息后终止提交form
+		return false;
+	}
+</script>
+
+
+<hr/>
+
+<!-- 注意到id为md5-password的<input>标记了name="password"，
+	而用户输入的id为input-password的<input>没有name属性。没有name属性的<input>的数据不会被提交。 -->
+<form id="login_form" method="post" onsubmit="return login()">
+	<input type="text" id="username" name="username">
+	<input type="password" id="input_password">
+	<input type="hidden" id="md5_password" name="password">
+	<button type="submit">login</button>
+
+</form>
+
+<script>
+	function toMD5(password){
+		return password+123;
+	}
+	function login(){
+		var inputPwd=document.getElementById('input_password');
+		var md5Pwd=document.getElementById('md5_password');
+		// 把用户输入的明文变为MD5
+		md5Pwd.value=toMD5(inputPwd.value);
+
+		console.log(md5Pwd.value);
+
+		//继续下一步
+		return false;
+	}
+</script>
+
+
+<form enctype="multipart/form-data" method="post" >
+<input type="file" id='test-file-upload'>
+<button onclick="upload()" type="button">upload</button>
+</form>
+
+<script>
+function upload(){
+	var f=document.getElementById('test-file-upload');
+	var filename=f.value;
+	if (!filename || !(filename.endsWith('.jpg') || filename.endsWith('.png') || filename.endsWith('.gif'))) {
+    alert('Can only upload image file.');
+    return false;
+    }
+	return true;
+}
+
+
+</script>
+
+
+<span id='test-response-text'></span>
+<!-- <script>
+	function onSuccess(text){
+		var reponseView=document.getElementById('test-response-text');
+		reponseView.value=text;
+	}
+	function onError(code){
+		var reponseView=document.getElementById('test-response-text');
+		reponseView.value='Error code: ' + code;
+	}
+
+	var request=new XMLHttpRequest();
+	request.onreadystatechange=function(){
+		if(request.readyState==4){
+			if(request.status==200){
+				return onSuccess(request.responseText);
+			}else{
+				return onError(request.status);
+			}
+		}else{
+			console.log('http continue....');
+		}
+	}
+
+	// 发送请求:
+	request.open('GET', '/api/categories');
+	request.send();
+
+
+	async function get(url){
+		try {
+
+			let resp= await fetch();
+			return resp.json();
+
+		} catch (error) {
+			
+		}
+
+	}
+
+	function doGet(){
+		let promise =  get('/api/categories');
+		promise.then(data=>{
+			console.log(data);
+		});
+	}
+
+</script> -->
+
+
+<canvas id="test-canvas" width="200" heigth="100">
+    <p>你的浏览器不支持Canvas</p>
+</canvas>
+
+<script>
+	var canvas=document.getElementById('test-canvas');
+	if(canvas.getContext){
+		console.log('你的浏览器支持Canvas!');
+	}else{
+		console.log('你的浏览器不支持Canvas!');
+	}
+
+
+	var ctx=canvas.getContext('2d');
+	ctx.clearRect(0, 0, 200, 200); // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
+	ctx.fillStyle = '#dddddd'; // 设置颜色
+	ctx.fillRect(10, 10, 130, 130); // 把(10,10)位置大小为130x130的矩形涂色
+	// 利用Path绘制复杂路径:
+	var path=new Path2D();
+	path.arc(75, 75, 50, 0, Math.PI*2, true);
+	path.moveTo(110,75);
+	path.arc(75, 75, 35, 0, Math.PI, false);
+	path.moveTo(65, 65);
+	path.arc(60, 65, 5, 0, Math.PI*2, true);
+	path.moveTo(95, 65);
+	path.arc(90, 65, 5, 0, Math.PI*2, true);
+	ctx.strokeStyle = '#0000ff';
+	ctx.stroke(path);
+
+
+</script>
+
 <body>
 
 </body>
