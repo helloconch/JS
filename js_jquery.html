@@ -2,11 +2,78 @@
 <head>
     <meta charset="utf-8">
     <title>Demo</title>
-</head>
-<body>
     <script src="./jquery-3.6.4.min.js"></script>
     <script>
        console.log(`jquery version:${$.fn.jquery}`);
+       console.log(window.jQuery);
+       console.log(window.$);
+       console.log(window.jQuery===window.$);
+       console.log($);
+       console.log(jQuery);
+
+       //仅选择JavaScript
+       console.log($("#para-1"));
+       // 仅选择Erlang
+       console.log($(".color-red.color-green"));
+       //选择JavaScript和Erlang
+       console.log($(".color-red"));
+       // 选择所有编程语言
+       console.log($('[class^="color-"]'));
+       // 选择名字input
+       console.log($('input[name=name]'));
+
+       $(document).ready(function(){
+           console.log('document ready');
+       });
+
+       $(function(){
+        console.log('document ready2');
+       });
+
+
     </script>
+</head>
+<body>
+
+    <!-- HTML结构 -->
+<div id="test-jquery">
+    <p id="para-1" class="color-red">JavaScript</p>
+    <p id="para-2" class="color-green">Haskell</p>
+    <p class="color-red color-green">Erlang</p>
+    <p name="name" class="color-black">Python</p>
+    <form class="test-form" target="_blank" action="#0" onsubmit="return false;">
+        <legend>注册新用户</legend>
+        <fieldset>
+            <p><label>名字: <input name="name"></label></p>
+            <p><label>邮件: <input name="email"></label></p>
+            <p><label>口令: <input name="password" type="password"></label></p>
+            <p><button type="submit">注册</button></p>
+        </fieldset>
+    </form>
+</div>
+
+<ul id="test-ul">
+    <li class="js">JavaScript</li>
+    <li name="book">Java &amp; JavaScript</li>
+</ul>
+
+<a id="test-link" href="#0">点我试试</a>
+
+<script>
+    console.log($('#test-ul li[name=book]').text());
+    console.log($('#test-ul li[name=book]').html('<span style="color: red">JavaScript</span>'));
+
+    var aView=$('#test-link');
+    // aView.on('click',function(){
+    //     alert('click');
+    // });
+
+    aView.click(function(){
+        alert('click');
+    });
+</script>
+
+
 </body>
+
 </html>
