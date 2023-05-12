@@ -1,0 +1,22 @@
+{
+    "name": "hello-node",
+    "version": "1.0.0",
+    "description": "Hello Node",
+    "main": "koa-test.js",
+    "scripts": {
+        "start": "koa-test.js"
+    },
+    "keywords": [
+        "koa",
+        "async"
+    ],
+    "author": "Michael Liao",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/michaelliao/learn-javascript.git"
+    },
+    "dependencies": {
+        "koa": "^2.14.2"
+    }
+}
